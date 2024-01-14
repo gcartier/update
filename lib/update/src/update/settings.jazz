@@ -1,0 +1,327 @@
+;;;==============
+;;;  JazzScheme
+;;;==============
+;;;
+;;;; Update Settings
+;;;
+;;;  The Initial Developer of the Original Code is Guillaume Cartier.
+;;;  Portions created by the Initial Developer are Copyright (C) 1996-2015
+;;;  the Initial Developer. All Rights Reserved.
+;;;
+;;;  Contributor(s):
+;;;
+;;;  See www.jazzscheme.org for details.
+
+
+(module update.settings jazz
+
+
+(import (jazz.io)
+        (jiri.connection)
+        (jiri.manager)
+        (jiri.section)
+        (jiri.settings)
+        (jiri.task))
+
+
+;;;
+;;;; Sirius
+;;;
+
+
+(definition sirius-environment-info
+  (cond-expand
+    (local  (list "Together" "local"))
+    (devel  (list "Together" "devel"))
+    (test   (list "Together" "test"))
+    (triage (list "Together" "triage"))
+    (stable (list "Together" "stable"))
+    (stage  (list "Together" "stage"))
+    (prod   (list "Together" "prod"))))
+
+(definition public sirius-environment-title
+  (first sirius-environment-info))
+
+(definition public sirius-environment-string
+  (second sirius-environment-info))
+
+
+(definition sirius-background
+  "background.png")
+
+
+;;;
+;;;; Together
+;;;
+
+
+(definition together-environment-info
+  (cond-expand
+    (local  (list "Test"   "local"))
+    (devel  (list "Devel"  "devel"))
+    (test   (list "Test"   "test"))
+    (triage (list "Triage" "triage"))
+    (stable (list "Stage"  "stable"))
+    (stage  (list "Stage"  "stage"))
+    (prod   (list "Prod"   "prod"))))
+
+(definition public together-environment-title
+  (first together-environment-info))
+
+(definition public together-environment-string
+  (second together-environment-info))
+
+
+;;;
+;;;; Jiri
+;;;
+
+
+(jiri-invite (cond-expand
+               (local "Together Local")
+               (devel "Together Devel")
+               (test "Together Test")
+               (triage "Together Triage")
+               (stable "Together Stable")
+               (stage "Together Stage")
+               (prod "Together")))
+(jiri-title sirius-environment-title)
+(jiri-background (new-file {Directory Resources "lib" "sirius" "assets"} sirius-background))
+(jiri-connections? #f)
+(jiri-dark-overlay? #t)
+(jiri-application "Together")
+
+
+;;;
+;;;; Name
+;;;
+
+
+(jiri-name-setting
+  (cond-expand
+    (local  {File Home ".together" "test" "1.0.0" ".name"})
+    (devel  {File Home ".together" "devel" "1.0.0" ".name"})
+    (test   {File Home ".together" "test" "1.0.0" ".name"})
+    (triage {File Home ".together" "triage" "1.0.0" ".name"})
+    (stable {File Home ".together" "stable" "1.0.0" ".name"})
+    (stage  {File Home ".together" "stage" "1.0.0" ".name"})
+    (prod   {File Home ".together" "prod" "1.0.0" ".name"})))
+
+
+;;;
+;;;; Crashes
+;;;
+
+
+(jiri-installer-crashes
+  (list (list "Sirius"
+              {Directory Home ".together-sirius" "crashes"}
+              (list "snapshot")
+              "http://logs.togethersphere.com/sirius/crashes")))
+
+
+(jiri-application-crashes
+  (list (list "Together"
+              (cond-expand
+                (local  {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
+                (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
+                (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
+                (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
+                (stable {Directory Home ".together" "stable" "1.0.0" "work" "crashes"})
+                (stage  {Directory Home ".together" "stage" "1.0.0" "work" "crashes"})
+                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))
+              (list "snapshot")
+              (cond-expand
+                (local  "http://logs.togethersphere.com/test/crashes")
+                (devel  "http://logs.togethersphere.com/devel/crashes")
+                (test   "http://logs.togethersphere.com/test/crashes")
+                (triage "http://logs.togethersphere.com/triage/crashes")
+                (stable "http://logs.togethersphere.com/stable/crashes")
+                (stage  "http://logs.togethersphere.com/stage/crashes")
+                (prod   "http://logs.togethersphere.com/prod/crashes")))))
+
+
+;;;
+;;;; Update
+;;;
+
+
+(jiri-update-section
+  (new Jiri-Section
+    title: "sirius"
+    dir: (cond-expand
+           (mac "Contents/Apps")
+           (else "app"))
+    part: .2
+    connection: (new Jiri-Connection
+                  title: "sirius"
+                  host: "togethersphere.com"
+                  path: (cond-expand
+                          (silicon (cond-expand
+                                     (local "together-sirius-test-silicon")
+                                     (devel "together-sirius-devel-silicon")
+                                     (test "together-sirius-test-silicon")
+                                     (triage "together-sirius-triage-silicon")
+                                     (stable "together-sirius-stable-silicon")
+                                     (stage "together-sirius-stage-silicon")
+                                     (prod "together-sirius-prod-silicon")))
+                          (mac (cond-expand
+                                 (local "together-sirius-test-mac")
+                                 (devel "together-sirius-devel-mac")
+                                 (test "together-sirius-test-mac")
+                                 (triage "together-sirius-triage-mac")
+                                 (stable "together-sirius-stable-mac")
+                                 (stage "together-sirius-stage-mac")
+                                 (prod "together-sirius-prod-mac")))
+                          (windows (cond-expand
+                                     (test "together-sirius-test-windows")
+                                     (devel "together-sirius-devel-windows")
+                                     (triage "together-sirius-triage-windows")
+                                     (stable "together-sirius-stable-windows")
+                                     (stage "together-sirius-stage-windows")
+                                     (prod "together-sirius-prod-windows")))
+                          (linux (cond-expand
+                                   (test "together-sirius-test-linux")
+                                   (devel "together-sirius-devel-linux")
+                                   (triage "together-sirius-triage-linux")
+                                   (stable "together-sirius-stable-linux")
+                                   (stage "together-sirius-stage-linux")
+                                   (prod "together-sirius-prod-linux"))))
+                  dirname: (cond-expand
+                             ;; the removal of the .app suffix is to ensure only
+                             ;; sirius gets registered for the togethersphere url
+                             (mac "Update")
+                             (else "update")))))
+
+(jiri-update-exe (cond-expand
+                   (mac "Together")
+                   (windows "Together.exe")
+                   (else "Together")))
+
+
+;;;
+;;;; Transfer
+;;;
+
+
+(jiri-transfer-section
+  (new Jiri-Section
+    title: "sirius"
+    part: .1
+    tasks: (list (new Jiri-Task part: 1.))))
+
+
+;;;
+;;;; App
+;;;
+
+
+(jiri-app-section
+  (new Jiri-Section
+    title: "together"
+    dir: (cond-expand
+           (mac "Contents/Apps")
+           (else "app"))
+    part: .4
+    connection: (new Jiri-Connection
+                  title: together-environment-title
+                  host: "togethersphere.com"
+                  path: (cond-expand
+                          (silicon (cond-expand
+                                     (local "together-test-silicon")
+                                     (devel "together-test-silicon")
+                                     (test "together-test-silicon")
+                                     (triage "together-triage-silicon")
+                                     (stable "together-prod-silicon")
+                                     (stage "together-stage-silicon")
+                                     (prod "together-prod-silicon")))
+                          (mac (cond-expand
+                                 (local "together-test-mac")
+                                 (devel "together-test-mac")
+                                 (test "together-test-mac")
+                                 (triage "together-triage-mac")
+                                 (stable "together-prod-mac")
+                                 (stage "together-stage-mac")
+                                 (prod "together-prod-mac")))
+                          (windows (cond-expand
+                                     (test "together-test-windows")
+                                     (devel "together-test-windows")
+                                     (triage "together-triage-windows")
+                                     (stable "together-prod-windows")
+                                     (stage "together-stage-windows")
+                                     (prod "together-prod-windows")))
+                          (linux (cond-expand
+                                   (test "together-test-linux")
+                                   (devel "together-test-linux")
+                                   (triage "together-triage-linux")
+                                   (stable "together-prod-linux")
+                                   (stage "together-stage-linux")
+                                   (prod "together-prod-linux"))))
+                  sets: '(#f object-base (object) (resource))
+                  update-sets: '(gstreamer outline)
+                  dirname: (cond-expand
+                             (mac "Together.app")
+                             (else "together")))))
+
+
+;;;
+;;;; Data
+;;;
+
+
+(jiri-data-section
+  (new Jiri-Section
+    title: "world"
+    dir: (cond-expand
+           (mac "Contents/Worlds")
+           (else "worlds"))
+    part: .1
+    connection: (new Jiri-Connection
+                  title: "World"
+                  host: "togethersphere.com"
+                  path: "together-world-universal"
+                  dirname: "together")))
+
+
+;;;
+;;;; Splash
+;;;
+
+
+(jiri-splash-section
+  (new Jiri-Section
+    title: "world"
+    part: .2
+    tasks: (list (new Jiri-Task part: 1.))))
+
+(jiri-splash-uptodate "Together is up to date")
+
+(jiri-splash-updated "You now have the latest version of Together!")
+
+(jiri-splash-end (cond-expand (windows 883)
+                              (else 860)))
+
+
+;;;
+;;;; Manager
+;;;
+
+
+(jiri-manager
+  (new Jiri-Manager
+    title: "Sirius"
+    sections: (list (jiri-update-section)
+                    (jiri-transfer-section)
+                    (jiri-app-section)
+                    (jiri-data-section)
+                    (jiri-splash-section))))
+
+
+;;;
+;;;; Debug
+;;;
+
+
+(jiri-process-name 'sirius)
+(jiri-settings-directory {Directory Home ".together-sirius"})
+(jiri-snapshots-directory {Directory Home ".together-sirius" "crashes"}))

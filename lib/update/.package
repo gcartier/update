@@ -1,0 +1,9 @@
+(package update
+  
+  (title "Update")
+  (description "Together Update")
+  (authors "Guillaume Cartier")
+  (root "src")
+  (products (update (update update.settings)
+                    (dependencies jazz)))
+  (project ".project"))
