@@ -148,7 +148,7 @@
     dir: (cond-expand
            (mac "Contents/Apps")
            (else "app"))
-    part: .2
+    part: .3
     connection: (new Jiri-Connection
                   title: "sirius"
                   host: "togethersphere.com"
@@ -184,27 +184,32 @@
                                    (stage "together-sirius-stage-linux")
                                    (prod "together-sirius-prod-linux"))))
                   dirname: (cond-expand
-                             ;; the removal of the .app suffix is to ensure only
-                             ;; sirius gets registered for the togethersphere url
-                             (mac "Update")
+                             (mac "Update.app")
                              (else "update")))))
 
 (jiri-update-exe (cond-expand
-                   (mac "Together")
-                   (windows "Together.exe")
-                   (else "Together")))
+                   (mac "Sirius")
+                   (windows "Sirius.exe")
+                   (else "Sirius")))
 
 
 ;;;
-;;;; Transfer
+;;;; Data
 ;;;
 
 
-(jiri-transfer-section
+(jiri-data-section
   (new Jiri-Section
-    title: "sirius"
+    title: "world"
+    dir: (cond-expand
+           (mac "Contents/Worlds")
+           (else "worlds"))
     part: .1
-    tasks: (list (new Jiri-Task part: 1.))))
+    connection: (new Jiri-Connection
+                  title: "World"
+                  host: "togethersphere.com"
+                  path: "together-world-universal"
+                  dirname: "together")))
 
 
 ;;;
@@ -253,30 +258,12 @@
                                    (stable "together-prod-linux")
                                    (stage "together-stage-linux")
                                    (prod "together-prod-linux"))))
-                  sets: '(#f object-base (object) (resource))
-                  update-sets: '(gstreamer outline)
+                  ; bouroum
+                  ;sets: '(#f object-base (object) (resource))
+                  ;update-sets: '(gstreamer outline)
                   dirname: (cond-expand
                              (mac "Together.app")
                              (else "together")))))
-
-
-;;;
-;;;; Data
-;;;
-
-
-(jiri-data-section
-  (new Jiri-Section
-    title: "world"
-    dir: (cond-expand
-           (mac "Contents/Worlds")
-           (else "worlds"))
-    part: .1
-    connection: (new Jiri-Connection
-                  title: "World"
-                  host: "togethersphere.com"
-                  path: "together-world-universal"
-                  dirname: "together")))
 
 
 ;;;
@@ -307,9 +294,8 @@
   (new Jiri-Manager
     title: "Sirius"
     sections: (list (jiri-update-section)
-                    (jiri-transfer-section)
-                    (jiri-app-section)
                     (jiri-data-section)
+                    (jiri-app-section)
                     (jiri-splash-section))))
 
 
