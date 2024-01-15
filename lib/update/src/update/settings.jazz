@@ -216,9 +216,9 @@
 (jiri-app-section
   (new Jiri-Section
     title: "together"
-    root: (cond-expand
-            (mac "Contents/Apps/Together.app")
-            (else "app/together"))
+    root: ""
+    directory: (cond-expand (mac "Contents/Resources/.jas")
+                            (else #f))
     part: .4
     connection: (new Jiri-Connection
                   title: together-environment-title
