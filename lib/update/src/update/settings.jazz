@@ -145,9 +145,9 @@
 (jiri-update-section
   (new Jiri-Section
     title: "sirius"
-    dir: (cond-expand
-           (mac "Contents/Apps")
-           (else "app"))
+    root: (cond-expand
+            (mac "Contents/Apps/Update.app")
+            (else "app/update"))
     part: .3
     connection: (new Jiri-Connection
                   title: "sirius"
@@ -182,10 +182,7 @@
                                    (triage "together-sirius-triage-linux")
                                    (stable "together-sirius-stable-linux")
                                    (stage "together-sirius-stage-linux")
-                                   (prod "together-sirius-prod-linux"))))
-                  dirname: (cond-expand
-                             (mac "Update.app")
-                             (else "update")))))
+                                   (prod "together-sirius-prod-linux")))))))
 
 (jiri-update-exe (cond-expand
                    (mac "Sirius")
@@ -201,15 +198,14 @@
 (jiri-data-section
   (new Jiri-Section
     title: "world"
-    dir: (cond-expand
-           (mac "Contents/Worlds")
-           (else "worlds"))
+    root: (cond-expand
+            (mac "Contents/Worlds/together")
+            (else "worlds/together"))
     part: .1
     connection: (new Jiri-Connection
                   title: "World"
                   host: "togethersphere.com"
-                  path: "together-world-universal"
-                  dirname: "together")))
+                  path: "together-world-universal")))
 
 
 ;;;
@@ -220,9 +216,9 @@
 (jiri-app-section
   (new Jiri-Section
     title: "together"
-    dir: (cond-expand
-           (mac "Contents/Apps")
-           (else "app"))
+    root: (cond-expand
+            (mac "Contents/Apps/Together.app")
+            (else "app/together"))
     part: .4
     connection: (new Jiri-Connection
                   title: together-environment-title
@@ -261,9 +257,7 @@
                   ; bouroum
                   ;sets: '(#f object-base (object) (resource))
                   ;update-sets: '(gstreamer outline)
-                  dirname: (cond-expand
-                             (mac "Together.app")
-                             (else "together")))))
+                  )))
 
 
 ;;;
