@@ -235,11 +235,7 @@
                                    (triage "together-triage-linux")
                                    (stable "together-prod-linux")
                                    (stage "together-stage-linux")
-                                   (prod "together-prod-linux"))))
-                  ; bouroum
-                  ;sets: '(#f object-base (object) (resource))
-                  ;update-sets: '(gstreamer outline)
-                  )))
+                                   (prod "together-prod-linux")))))))
 
 
 ;;;
