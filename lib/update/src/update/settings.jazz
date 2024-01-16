@@ -191,24 +191,6 @@
 
 
 ;;;
-;;;; Data
-;;;
-
-
-(jiri-data-section
-  (new Jiri-Section
-    title: "world"
-    root: (cond-expand
-            (mac "Contents/Worlds/together")
-            (else "worlds/together"))
-    part: .1
-    connection: (new Jiri-Connection
-                  title: "World"
-                  host: "togethersphere.com"
-                  path: "together-world-universal")))
-
-
-;;;
 ;;;; App
 ;;;
 
@@ -261,6 +243,24 @@
 
 
 ;;;
+;;;; Data
+;;;
+
+
+(jiri-data-section
+  (new Jiri-Section
+    title: "world"
+    root: (cond-expand
+            (mac "Contents/Worlds/together")
+            (else "worlds/together"))
+    part: .1
+    connection: (new Jiri-Connection
+                  title: "World"
+                  host: "togethersphere.com"
+                  path: "together-world-universal")))
+
+
+;;;
 ;;;; Splash
 ;;;
 
@@ -288,8 +288,8 @@
   (new Jiri-Manager
     title: "Sirius"
     sections: (list (jiri-update-section)
-                    (jiri-data-section)
                     (jiri-app-section)
+                    (jiri-data-section)
                     (jiri-splash-section))))
 
 
