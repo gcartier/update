@@ -105,36 +105,36 @@
 
 
 ;;;
-;;;; Crashes
+;;;; Snapshots
 ;;;
 
 
-(jiri-installer-crashes
+(jiri-installer-snapshots
   (list (list "Sirius"
-              {Directory Home ".together-sirius" "crashes"}
+              {Directory Home ".together-sirius" "snapshots"}
               (list "snapshot")
-              "http://logs.togethersphere.com/sirius/crashes")))
+              "http://logs.togethersphere.com/sirius/snapshots")))
 
 
-(jiri-application-crashes
+(jiri-application-snapshots
   (list (list "Together"
               (cond-expand
-                (local  {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
-                (devel  {Directory Home ".together" "devel" "1.0.0" "work" "crashes"})
-                (test   {Directory Home ".together" "test" "1.0.0" "work" "crashes"})
-                (triage {Directory Home ".together" "triage" "1.0.0" "work" "crashes"})
-                (stable {Directory Home ".together" "stable" "1.0.0" "work" "crashes"})
-                (stage  {Directory Home ".together" "stage" "1.0.0" "work" "crashes"})
-                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "crashes"}))
+                (local  {Directory Home ".together" "test" "1.0.0" "work" "snapshots"})
+                (devel  {Directory Home ".together" "devel" "1.0.0" "work" "snapshots"})
+                (test   {Directory Home ".together" "test" "1.0.0" "work" "snapshots"})
+                (triage {Directory Home ".together" "triage" "1.0.0" "work" "snapshots"})
+                (stable {Directory Home ".together" "stable" "1.0.0" "work" "snapshots"})
+                (stage  {Directory Home ".together" "stage" "1.0.0" "work" "snapshots"})
+                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "snapshots"}))
               (list "snapshot")
               (cond-expand
-                (local  "http://logs.togethersphere.com/test/crashes")
-                (devel  "http://logs.togethersphere.com/devel/crashes")
-                (test   "http://logs.togethersphere.com/test/crashes")
-                (triage "http://logs.togethersphere.com/triage/crashes")
-                (stable "http://logs.togethersphere.com/stable/crashes")
-                (stage  "http://logs.togethersphere.com/stage/crashes")
-                (prod   "http://logs.togethersphere.com/prod/crashes")))))
+                (local  "http://logs.togethersphere.com/test/snapshots")
+                (devel  "http://logs.togethersphere.com/devel/snapshots")
+                (test   "http://logs.togethersphere.com/test/snapshots")
+                (triage "http://logs.togethersphere.com/triage/snapshots")
+                (stable "http://logs.togethersphere.com/stable/snapshots")
+                (stage  "http://logs.togethersphere.com/stage/snapshots")
+                (prod   "http://logs.togethersphere.com/prod/snapshots")))))
 
 
 ;;;
@@ -293,4 +293,4 @@
 
 (jiri-process-name 'sirius)
 (jiri-settings-directory {Directory Home ".together-sirius"})
-(jiri-snapshots-directory {Directory Home ".together-sirius" "crashes"}))
+(jiri-snapshots-directory {Directory Home ".together-sirius" "snapshots"}))
