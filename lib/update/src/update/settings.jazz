@@ -271,9 +271,6 @@
 
 (jiri-splash-updated "You now have the latest version of Together!")
 
-(jiri-splash-end (cond-expand (windows 883)
-                              (else 860)))
-
 
 ;;;
 ;;;; Manager
