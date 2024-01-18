@@ -265,7 +265,7 @@
   (new Jiri-Section
     title: "world"
     part: .2
-    tasks: (list (new Jiri-Task part: 1.))))
+    tasks: (list (new Jiri-Task part: 1. doneable?: #f))))
 
 (jiri-splash-uptodate "Together is up to date")
 
