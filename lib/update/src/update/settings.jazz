@@ -265,6 +265,12 @@
                                    (prod "together-prod-linux")))))))
 
 
+(jiri-app-exe (cond-expand
+                (mac "Together")
+                (windows "Together.exe")
+                (else "Together")))
+
+
 ;;;
 ;;;; Data
 ;;;
