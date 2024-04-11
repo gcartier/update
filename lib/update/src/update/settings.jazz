@@ -83,7 +83,6 @@
                (prod "Together")))
 (jiri-title sirius-environment-title)
 (jiri-background {File Resources "lib" "sirius" "assets" "background.png"})
-(jiri-connections? #f)
 (jiri-dark-overlay? #t)
 (jiri-application "Together")
 
