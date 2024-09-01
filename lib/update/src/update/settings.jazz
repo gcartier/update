@@ -37,7 +37,8 @@
     (triage (list "Together" "triage"))
     (stable (list "Together" "stable"))
     (stage  (list "Together" "stage"))
-    (prod   (list "Together" "prod"))))
+    (prod   (list "Together" "prod"))
+    (live   (list "Together" "live"))))
 
 (definition public sirius-environment-title
   (first sirius-environment-info))
@@ -59,7 +60,8 @@
     (triage (list "Triage" "triage"))
     (stable (list "Stage"  "stable"))
     (stage  (list "Stage"  "stage"))
-    (prod   (list "Prod"   "prod"))))
+    (prod   (list "Prod"   "prod"))
+    (live   (list "Prod"   "live"))))
 
 (definition public together-environment-title
   (first together-environment-info))
@@ -80,7 +82,8 @@
                (triage "Together Triage")
                (stable "Together Stable")
                (stage "Together Stage")
-               (prod "Together")))
+               (prod "Together")
+               (live "Together Live")))
 (jiri-title sirius-environment-title)
 (jiri-background {File Resources "lib" "sirius" "assets" "background.png"})
 (jiri-dark-overlay? #t)
@@ -100,7 +103,8 @@
     (triage {File Home ".together" "triage" "1.0.0" ".name"})
     (stable {File Home ".together" "stable" "1.0.0" ".name"})
     (stage  {File Home ".together" "stage" "1.0.0" ".name"})
-    (prod   {File Home ".together" "prod" "1.0.0" ".name"})))
+    (prod   {File Home ".together" "prod" "1.0.0" ".name"})
+    (live   {File Home ".together" "live" "1.0.0" ".name"})))
 
 
 ;;;
@@ -123,7 +127,8 @@
                 (triage {Directory Home ".together" "triage" "1.0.0" "work" "snapshots"})
                 (stable {Directory Home ".together" "stable" "1.0.0" "work" "snapshots"})
                 (stage  {Directory Home ".together" "stage" "1.0.0" "work" "snapshots"})
-                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "snapshots"}))
+                (prod   {Directory Home ".together" "prod" "1.0.0" "work" "snapshots"})
+                (live   {Directory Home ".together" "live" "1.0.0" "work" "snapshots"}))
               (cond-expand
                 (local  "http://logs.togethersphere.com/test/snapshots")
                 (devel  "http://logs.togethersphere.com/devel/snapshots")
@@ -131,7 +136,8 @@
                 (triage "http://logs.togethersphere.com/triage/snapshots")
                 (stable "http://logs.togethersphere.com/stable/snapshots")
                 (stage  "http://logs.togethersphere.com/stage/snapshots")
-                (prod   "http://logs.togethersphere.com/prod/snapshots")))))
+                (prod   "http://logs.togethersphere.com/prod/snapshots")
+                (live   "http://logs.togethersphere.com/live/snapshots")))))
 
 
 ;;;
@@ -157,7 +163,8 @@
                                      (triage "together-sirius-triage-silicon")
                                      (stable "together-sirius-stable-silicon")
                                      (stage "together-sirius-stage-silicon")
-                                     (prod "together-sirius-prod-silicon")))
+                                     (prod "together-sirius-prod-silicon")
+                                     (live "together-sirius-live-silicon")))
                           (mac (cond-expand
                                  (local "together-sirius-test-mac")
                                  (devel "together-sirius-devel-mac")
@@ -165,21 +172,24 @@
                                  (triage "together-sirius-triage-mac")
                                  (stable "together-sirius-stable-mac")
                                  (stage "together-sirius-stage-mac")
-                                 (prod "together-sirius-prod-mac")))
+                                 (prod "together-sirius-prod-mac")
+                                 (live "together-sirius-live-mac")))
                           (windows (cond-expand
                                      (test "together-sirius-test-windows")
                                      (devel "together-sirius-devel-windows")
                                      (triage "together-sirius-triage-windows")
                                      (stable "together-sirius-stable-windows")
                                      (stage "together-sirius-stage-windows")
-                                     (prod "together-sirius-prod-windows")))
+                                     (prod "together-sirius-prod-windows")
+                                     (live "together-sirius-live-windows")))
                           (linux (cond-expand
                                    (test "together-sirius-test-linux")
                                    (devel "together-sirius-devel-linux")
                                    (triage "together-sirius-triage-linux")
                                    (stable "together-sirius-stable-linux")
                                    (stage "together-sirius-stage-linux")
-                                   (prod "together-sirius-prod-linux")))))))
+                                   (prod "together-sirius-prod-linux")
+                                   (live "together-sirius-live-linux")))))))
 
 (jiri-update-exe (cond-expand
                    (mac "Sirius")
@@ -208,12 +218,14 @@
                                         (triage "together-worker-triage-silicon")
                                         (stage "together-worker-stage-silicon")
                                         (prod "together-worker-prod-silicon")
+                                        (live "together-worker-live-silicon")
                                         (else #f)))
                              (mac (cond-expand
                                     (test "together-worker-test-mac")
                                     (triage "together-worker-triage-mac")
                                     (stage "together-worker-stage-mac")
                                     (prod "together-worker-prod-mac")
+                                    (live "together-worker-live-mac")
                                     (else #f))))))))
   (else))
 
@@ -241,7 +253,8 @@
                                      (triage "together-triage-silicon")
                                      (stable "together-prod-silicon")
                                      (stage "together-stage-silicon")
-                                     (prod "together-prod-silicon")))
+                                     (prod "together-prod-silicon")
+                                     (live "together-live-silicon")))
                           (mac (cond-expand
                                  (local "together-test-mac")
                                  (devel "together-test-mac")
@@ -249,21 +262,24 @@
                                  (triage "together-triage-mac")
                                  (stable "together-prod-mac")
                                  (stage "together-stage-mac")
-                                 (prod "together-prod-mac")))
+                                 (prod "together-prod-mac")
+                                 (live "together-live-mac")))
                           (windows (cond-expand
                                      (test "together-test-windows")
                                      (devel "together-test-windows")
                                      (triage "together-triage-windows")
                                      (stable "together-prod-windows")
                                      (stage "together-stage-windows")
-                                     (prod "together-prod-windows")))
+                                     (prod "together-prod-windows")
+                                     (live "together-live-windows")))
                           (linux (cond-expand
                                    (test "together-test-linux")
                                    (devel "together-test-linux")
                                    (triage "together-triage-linux")
                                    (stable "together-prod-linux")
                                    (stage "together-stage-linux")
-                                   (prod "together-prod-linux")))))))
+                                   (prod "together-prod-linux")
+                                   (live "together-live-linux")))))))
 
 
 (jiri-app-exe (cond-expand
