@@ -192,9 +192,9 @@
                                    (live "together-sirius-live-linux")))))))
 
 (jiri-update-exe (cond-expand
-                   (mac "Sirius")
-                   (windows "Sirius.exe")
-                   (else "Sirius")))
+                   (mac "TogetherUpdate")
+                   (windows "TogetherUpdate.exe")
+                   (else "TogetherUpdate")))
 
 
 ;;;
