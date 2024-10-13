@@ -149,8 +149,8 @@
   (new Jiri-Section
     title: "sirius"
     root: (cond-expand
-            (mac "Contents/Apps/Update.app")
-            (else "app/update"))
+            (mac "Contents/Apps/TogetherUpdate.app")
+            (else "app/togetherupdate"))
     part: .3
     connection: (new Jiri-Connection
                   title: "sirius"

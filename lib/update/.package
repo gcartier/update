@@ -1,6 +1,6 @@
 (package update
   
-  (title "Update")
+  (title "Together Update")
   (description "Together Update")
   (authors "Guillaume Cartier")
   (root "src")
